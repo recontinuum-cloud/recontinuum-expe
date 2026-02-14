@@ -1,0 +1,13 @@
+---
+// src/components/atoms/SectionTag.astro
+// Eyebrow label used above every section heading
+
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: className = '' } = Astro.props;
+---
+
+<span class={`eyebrow ${className}`}>{text}</span>
