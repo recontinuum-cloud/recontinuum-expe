@@ -1,0 +1,200 @@
+---
+// src/components/organisms/Contact.astro
+
+import SectionTag from '../atoms/SectionTag.astro';
+import Button from '../atoms/Button.astro';
+import { company } from '../../data/company';
+
+const enquiryTypes = [
+  'Business Partnership',
+  'Strategic Collaboration',
+  'Investment Inquiry',
+  'Life Sciences / Rajmeric',
+  'General Enquiry',
+] as const;
+---
+
+<section id="contact" class="bg-obsidian-900 relative overflow-hidden" aria-labelledby="contact-heading">
+  <!-- Background glow -->
+  <div
+    class="absolute -top-[400px] -right-[300px] w-[900px] h-[900px] rounded-full pointer-events-none"
+    style="background: radial-gradient(ellipse, rgba(200,164,74,0.04) 0%, transparent 60%);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="max-w-[1400px] mx-auto px-[4vw] py-section relative z-10
+              grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-28">
+
+    <!-- Left: Contact info -->
+    <div class="reveal">
+      <SectionTag text="Get In Touch" />
+      <h2
+        id="contact-heading"
+        class="font-display text-display-lg font-light text-ivory mt-4 mb-8"
+      >
+        Begin a<br /><em class="text-gold-500 not-italic">Conversation</em>
+      </h2>
+      <p class="text-[0.92rem] leading-[1.85] text-silver mb-10">
+        For business partnerships, strategic collaborations, and investment inquiries,
+        please reach out. All communications are handled professionally and confidentially.
+      </p>
+
+      <!-- Details -->
+      <dl class="space-y-6">
+        <div>
+          <dt class="text-[0.55rem] uppercase tracking-[0.3em] text-gold mb-1">Registered Company</dt>
+          <dd class="text-[0.9rem] text-mist">{company.name}</dd>
+        </div>
+        <div>
+          <dt class="text-[0.55rem] uppercase tracking-[0.3em] text-gold mb-1">Address</dt>
+          <dd class="text-[0.9rem] text-mist">
+            {company.address.city}, {company.address.state} – {company.address.pincode}, {company.address.country}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-[0.55rem] uppercase tracking-[0.3em] text-gold mb-1">Email</dt>
+          <dd>
+            <a href={`mailto:${company.contact.email}`}
+               class="text-[0.9rem] text-gold-500 hover:text-gold-400 transition-colors">
+              {company.contact.email}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-[0.55rem] uppercase tracking-[0.3em] text-gold mb-1">Phone</dt>
+          <dd>
+            <a href={`tel:${company.contact.phone.replace(/\s/g,'')}`}
+               class="text-[0.9rem] text-gold-500 hover:text-gold-400 transition-colors">
+              {company.contact.phone}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-[0.55rem] uppercase tracking-[0.3em] text-gold mb-1">Website</dt>
+          <dd>
+            <a href={company.website}
+               class="text-[0.9rem] text-gold-500 hover:text-gold-400 transition-colors">
+              www.recontinuum.com
+            </a>
+          </dd>
+        </div>
+      </dl>
+
+      <!-- CIN badge -->
+      <div class="inline-block mt-8 px-4 py-2 border border-border text-[0.6rem] tracking-[0.15em] text-silver">
+        CIN: {company.cin}
+      </div>
+    </div>
+
+    <!-- Right: Contact form -->
+    <form
+      class="reveal [transition-delay:200ms] flex flex-col gap-5"
+      id="contact-form"
+      novalidate
+    >
+      <!-- Name + Org -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div class="flex flex-col gap-2">
+          <label for="fullName" class="text-[0.58rem] uppercase tracking-[0.25em] text-silver">Full Name *</label>
+          <input
+            type="text" id="fullName" name="fullName" required
+            placeholder="Your name"
+            class="bg-charcoal border border-border border-b-2 border-b-border
+                   text-mist font-sans text-[0.9rem] font-light px-4 py-3.5
+                   outline-none transition-all duration-300
+                   focus:border-b-gold focus:bg-[#1c1c22]
+                   placeholder:text-graphite"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="organisation" class="text-[0.58rem] uppercase tracking-[0.25em] text-silver">Organisation</label>
+          <input
+            type="text" id="organisation" name="organisation"
+            placeholder="Company / Firm"
+            class="bg-charcoal border border-border border-b-2 border-b-border
+                   text-mist font-sans text-[0.9rem] font-light px-4 py-3.5
+                   outline-none transition-all duration-300
+                   focus:border-b-gold focus:bg-[#1c1c22]
+                   placeholder:text-graphite"
+          />
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="flex flex-col gap-2">
+        <label for="email" class="text-[0.58rem] uppercase tracking-[0.25em] text-silver">Email Address *</label>
+        <input
+          type="email" id="email" name="email" required
+          placeholder="your@email.com"
+          class="bg-charcoal border border-border border-b-2 border-b-border
+                 text-mist font-sans text-[0.9rem] font-light px-4 py-3.5
+                 outline-none transition-all duration-300
+                 focus:border-b-gold focus:bg-[#1c1c22]
+                 placeholder:text-graphite"
+        />
+      </div>
+
+      <!-- Enquiry type -->
+      <div class="flex flex-col gap-2">
+        <label for="enquiryType" class="text-[0.58rem] uppercase tracking-[0.25em] text-silver">Nature of Enquiry</label>
+        <select
+          id="enquiryType" name="enquiryType"
+          class="bg-charcoal border border-border border-b-2 border-b-border
+                 text-mist font-sans text-[0.9rem] font-light px-4 py-3.5
+                 outline-none transition-all duration-300 appearance-none
+                 focus:border-b-gold focus:bg-[#1c1c22]"
+        >
+          <option value="" disabled selected>Select a category</option>
+          {enquiryTypes.map(type => (
+            <option value={type} class="bg-charcoal">{type}</option>
+          ))}
+        </select>
+      </div>
+
+      <!-- Message -->
+      <div class="flex flex-col gap-2">
+        <label for="message" class="text-[0.58rem] uppercase tracking-[0.25em] text-silver">Message</label>
+        <textarea
+          id="message" name="message" rows={5}
+          placeholder="Please describe your enquiry..."
+          class="bg-charcoal border border-border border-b-2 border-b-border
+                 text-mist font-sans text-[0.9rem] font-light px-4 py-3.5
+                 outline-none transition-all duration-300 resize-none
+                 focus:border-b-gold focus:bg-[#1c1c22]
+                 placeholder:text-graphite"
+        ></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button
+          type="submit"
+          id="submit-btn"
+          class="inline-flex items-center gap-3 bg-gold-gradient text-obsidian-900
+                 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em]
+                 px-10 py-4 border-none cursor-pointer
+                 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-gold
+                 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          <span id="submit-label">Submit Enquiry →</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const label = document.getElementById('submit-label');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (label) {
+      label.textContent = 'Enquiry Received ✓';
+      setTimeout(() => {
+        label.textContent = 'Submit Enquiry →';
+        form.reset();
+      }, 3000);
+    }
+  });
+</script>
