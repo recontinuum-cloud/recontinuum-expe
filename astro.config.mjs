@@ -10,14 +10,6 @@ export default defineConfig({
     tailwind({ applyBaseStyles: false }),
     sitemap(),
   ],
-  image: {
-    // Automated WebP/AVIF conversion
-    domains: [],
-    remotePatterns: [],
-    service: {
-      entrypoint: 'astro/assets/services/sharp',
-    },
-  },
   compressHTML: true,
   build: {
     inlineStylesheets: 'auto',
