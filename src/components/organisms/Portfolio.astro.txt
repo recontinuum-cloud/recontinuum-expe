@@ -1,0 +1,65 @@
+---
+import SectionTag from '../atoms/SectionTag.astro';
+import { portfolio } from '../../data/company';
+---
+
+<section id="portfolio" class="bg-obsidian-900" aria-labelledby="portfolio-heading">
+  <div class="max-w-[1400px] mx-auto px-[4vw] py-section reveal">
+    <SectionTag text="Our Portfolio" />
+    <h2 id="portfolio-heading" class="font-display text-display-lg font-light text-ivory mt-4 mb-12">
+      Primary <em class="text-gold-500 not-italic">Enterprise</em>
+    </h2>
+
+    {portfolio.map(venture => (
+      <article
+        class="border border-border border-l-[4px] border-l-gold bg-charcoal
+               p-14 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16 items-center
+               max-w-[1000px] mx-auto
+               transition-all duration-400
+               hover:border-l-gold-400 hover:-translate-y-1 hover:shadow-card"
+        aria-label={venture.name}
+      >
+        <!-- Left: Identity + description -->
+        <div>
+          <p class="text-eyebrow uppercase tracking-[0.3em] text-gold mb-5">
+            {venture.sector} · {venture.stage}
+          </p>
+
+          <!-- FIX 3: Rajmeric logo — hardcoded path, white background pill so colors show -->
+          <div class="mb-5 inline-block bg-white rounded-lg px-4 py-2">
+            <img
+              src="/images/rajmeric-logo.png"
+              alt="Rajmeric Lifesciences"
+              width="240"
+              height="80"
+              class="h-[48px] w-auto object-contain block"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <p class="text-[0.9rem] leading-[1.9] text-silver">{venture.description}</p>
+
+          <ul class="mt-6 space-y-2" aria-label="Focus areas">
+            {venture.focusAreas.map(area => (
+              <li class="flex items-center gap-3 text-sm text-silver">
+                <span class="w-1 h-1 rounded-full bg-gold flex-shrink-0" aria-hidden="true"></span>
+                {area}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Right: Metadata cards -->
+        <div class="grid grid-cols-1 gap-3" role="list" aria-label="Venture details">
+          {venture.metadata.map(item => (
+            <div class="bg-obsidian-900 border border-graphite p-5" role="listitem">
+              <p class="text-[0.55rem] uppercase tracking-[0.25em] text-gold mb-2">{item.label}</p>
+              <p class="text-[0.88rem] text-mist">{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
