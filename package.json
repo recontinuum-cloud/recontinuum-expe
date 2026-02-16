@@ -2,11 +2,13 @@
   "name": "recontinuum-holding",
   "type": "module",
   "version": "1.0.0",
+  "description": "Official website of Recontinuum Holding Private Limited",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/react": "3.6.0",
